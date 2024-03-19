@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Reflection;
 
 namespace InformationSecurity
 {
@@ -17,7 +18,7 @@ namespace InformationSecurity
 
         // Алгоритм формирования секретного ключа Диффи-Хеллмана
         public static void Practice2() {
-            string message = "Текст, в котором многа букавак.";
+            string message = "Это простой текст.";
             Console.WriteLine("Исходное сообщение: " + message);
 
             byte p = 71, g = 79;
@@ -29,11 +30,31 @@ namespace InformationSecurity
             dha.Process();
         }
 
+        //
+        public static void Practice3() {
+            Assembly? assembly = Assembly.GetAssembly(typeof(BiometryWinFormApp.Program));  // не работает в конфигурации Release
+
+            string targetExe;
+
+            if (assembly != null) {
+                targetExe = assembly.Location;
+
+                // replace "dll" with "exe"
+                targetExe = targetExe.Substring(0, targetExe.Length - 3) + "exe";
+            }
+            else {
+                Console.WriteLine("Исполняемый файл не найден. Завершение работы программы.");
+                return;
+            }
+
+            Process.Start(targetExe);
+        }
+
         #endregion
 
         private static void Main(string[] args)
         {
-            Practice2();
+            Practice3();
         }
 
         public static ulong Pow(int x, int power) {

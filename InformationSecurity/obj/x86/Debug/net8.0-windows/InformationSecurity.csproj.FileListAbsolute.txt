@@ -1,0 +1,6 @@
+C:\Users\maxer\OneDrive\Desktop\Education - PIe20.20\8 сем\Информационная безопасность\Information_security\InformationSecurity\obj\x86\Debug\net8.0-windows\InformationSecurity.csproj.AssemblyReference.cache
+C:\Users\maxer\OneDrive\Desktop\Education - PIe20.20\8 сем\Информационная безопасность\Information_security\InformationSecurity\obj\x86\Debug\net8.0-windows\InformationSecurity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxer\OneDrive\Desktop\Education - PIe20.20\8 сем\Информационная безопасность\Information_security\InformationSecurity\obj\x86\Debug\net8.0-windows\InformationSecurity.AssemblyInfoInputs.cache
+C:\Users\maxer\OneDrive\Desktop\Education - PIe20.20\8 сем\Информационная безопасность\Information_security\InformationSecurity\obj\x86\Debug\net8.0-windows\InformationSecurity.AssemblyInfo.cs
+C:\Users\maxer\OneDrive\Desktop\Education - PIe20.20\8 сем\Информационная безопасность\Information_security\InformationSecurity\obj\x86\Debug\net8.0-windows\InformationSecurity.csproj.CoreCompileInputs.cache
+C:\Users\maxer\OneDrive\Desktop\Education - PIe20.20\8 сем\Информационная безопасность\Information_security\InformationSecurity\obj\x86\Debug\net8.0-windows\InformationSecurity.sourcelink.json
