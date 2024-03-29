@@ -1,10 +1,12 @@
-﻿using InformationSecurity.MessagingService;
+﻿using InformationSecurity.Cryptography.MessagingService;
 using System.Text;
 
-namespace InformationSecurity {
+namespace InformationSecurity.Cryptography
+{
 
     // Класс, описывающий алгоритм формирования ключа Диффи-Хеллмана
-    internal class DHA {
+    internal class DHA
+    {
 
         // Максимаьные значения основания степени (2^(8-1) - 1 = 127) и показателя степени (2^(8-5) - 1 = 7) соответственно.
         // Данные переменные накладывают ограничения на максимальные значения параметров в операциях возведения в степень.
@@ -20,7 +22,8 @@ namespace InformationSecurity {
 
         public string OriginalPlaintText { get; private set; }
 
-        private List<Abonent> GenerateTwoSidedCommunication(string abon1Name, string abon2Name) {
+        private List<Abonent> GenerateTwoSidedCommunication(string abon1Name, string abon2Name)
+        {
             Abonent ab1 = new Abonent(abon1Name, p, g);
             Abonent ab2 = new Abonent(abon2Name, p, g);
 
@@ -28,7 +31,8 @@ namespace InformationSecurity {
         }
 
         // Проерка числа на то, является ли оно простым
-        public static bool IsPrimeNumber(uint num) {
+        public static bool IsPrimeNumber(uint num)
+        {
             int x = 2;
 
             while (num % x != 0 && x <= Math.Sqrt(num))
@@ -39,38 +43,44 @@ namespace InformationSecurity {
 
             return false;
         }
-        public static byte GeneratePowerByte() {
+        public static byte GeneratePowerByte()
+        {
             Random random = new Random();
-            byte x = (byte) random.Next(0, MaxPower + 1);
+            byte x = (byte)random.Next(0, MaxPower + 1);
 
             return x;
         }
 
         // Список алгоритмов шифрования при передаче сообщений через алгоритм Диффи-Хеллмана
-        public enum EncryptionType {
+        public enum EncryptionType
+        {
             CaesarsCipher, AES
         }
 
         // Функция, выполняющая отправку одного сообщения от одного абонента к другому
-        public void Process() {
+        public void Process()
+        {
             char[] encryptedChars;
 
-            switch (_encryptionType) {
-                case EncryptionType.AES: {
+            switch (_encryptionType)
+            {
+                case EncryptionType.AES:
+                    {
                         AesExample.Process(OriginalPlaintText);
                         break;
                     }
-                case EncryptionType.CaesarsCipher: {
+                case EncryptionType.CaesarsCipher:
+                    {
                         Encoding encoding = Console.OutputEncoding;
                         Console.OutputEncoding = Encoding.Unicode;
 
-                        encryptedChars = CaesarsCipher.EncryptStrToCharArr(OriginalPlaintText, (sbyte) Key);
+                        encryptedChars = CaesarsCipher.EncryptStrToCharArr(OriginalPlaintText, (sbyte)Key);
 
                         _abonents[0].SendEncryptedMessage(_abonents[1], encryptedChars);
                         _abonents[1].PrintEncryptedChars();
 
-                        Console.WriteLine("Дешифрованное сообщение у " + _abonents[1].Name + ": " + 
-                            new string(CaesarsCipher.DecryptCharsToCharArr(encryptedChars, (sbyte) Key)));
+                        Console.WriteLine("Дешифрованное сообщение у " + _abonents[1].Name + ": " +
+                            new string(CaesarsCipher.DecryptCharsToCharArr(encryptedChars, (sbyte)Key)));
 
                         Console.OutputEncoding = encoding;
 
@@ -81,14 +91,16 @@ namespace InformationSecurity {
 
         private DHA() { }
 
-        public DHA(string plainText, byte p, byte g, EncryptionType encryptionType = EncryptionType.CaesarsCipher) {
-            if (!(IsPrimeNumber(p) && IsPrimeNumber(g))) {
+        public DHA(string plainText, byte p, byte g, EncryptionType encryptionType = EncryptionType.CaesarsCipher)
+        {
+            if (!(IsPrimeNumber(p) && IsPrimeNumber(g)))
+            {
                 Console.WriteLine("Значение переменной p или q не является простым числом." +
                     "Новые значения переменных: p = 71, g = 79");
                 p = 71; g = 79;
             }
 
-            if (String.IsNullOrEmpty(plainText))
+            if (string.IsNullOrEmpty(plainText))
                 plainText = "Это простой текст.";
 
 

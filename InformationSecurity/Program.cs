@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using System.Reflection;
+using System.Text;
+using InformationSecurity.Cryptography;
+using InformationSecurity.Steganography;
 
 namespace InformationSecurity
 {
@@ -30,7 +34,7 @@ namespace InformationSecurity
             dha.Process();
         }
 
-        //
+        // Запуск WinForms-программы, выполняющей обнаружение и распознавание лиц
         public static void Practice3() {
             Assembly? assembly = Assembly.GetAssembly(typeof(BiometryWinFormApp.Program));  // не работает в конфигурации Release
 
@@ -50,11 +54,29 @@ namespace InformationSecurity
             Process.Start(targetExe);
         }
 
+        // Алгоритм стеганографии "Наименее значащий бит"
+        public static void Practice4() {
+            string originImagePath = "Steganography\\images\\1012.png";
+            var imageData = new ImageData(Image.FromFile(originImagePath));
+
+            var lsb = new LSB(imageData, Encoding.UTF8);
+
+            string[] messages = {
+                "This is an encoded text!",
+                new string('I', 100000),
+                "Это зашифрованный текст."
+            };
+
+            byte[] lsbNumbers = { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            lsb.TestExample(messages[0], lsbNumbers[7]);
+        }
+
         #endregion
 
         private static void Main(string[] args)
         {
-            Practice3();
+            Practice4();
         }
 
         public static ulong Pow(int x, int power) {

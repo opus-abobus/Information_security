@@ -17,4 +17,10 @@
     <ProjectReference Include="..\BiometryWinFormApp\BiometryWinFormApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Steganography\images\1012.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
